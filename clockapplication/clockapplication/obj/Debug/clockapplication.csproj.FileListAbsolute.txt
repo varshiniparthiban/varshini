@@ -1,0 +1,10 @@
+C:\Users\varsh\source\repos\clockapplication\clockapplication\bin\Debug\clockapplication.exe.config
+C:\Users\varsh\source\repos\clockapplication\clockapplication\bin\Debug\clockapplication.exe
+C:\Users\varsh\source\repos\clockapplication\clockapplication\bin\Debug\clockapplication.pdb
+C:\Users\varsh\source\repos\clockapplication\clockapplication\obj\Debug\clockapplication.csproj.AssemblyReference.cache
+C:\Users\varsh\source\repos\clockapplication\clockapplication\obj\Debug\clockapplication.Form1.resources
+C:\Users\varsh\source\repos\clockapplication\clockapplication\obj\Debug\clockapplication.Properties.Resources.resources
+C:\Users\varsh\source\repos\clockapplication\clockapplication\obj\Debug\clockapplication.csproj.GenerateResource.cache
+C:\Users\varsh\source\repos\clockapplication\clockapplication\obj\Debug\clockapplication.csproj.CoreCompileInputs.cache
+C:\Users\varsh\source\repos\clockapplication\clockapplication\obj\Debug\clockapplication.exe
+C:\Users\varsh\source\repos\clockapplication\clockapplication\obj\Debug\clockapplication.pdb
