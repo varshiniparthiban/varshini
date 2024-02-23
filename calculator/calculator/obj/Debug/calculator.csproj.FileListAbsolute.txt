@@ -1,0 +1,10 @@
+C:\Users\varsh\source\repos\calculator\calculator\bin\Debug\calculator.exe.config
+C:\Users\varsh\source\repos\calculator\calculator\bin\Debug\calculator.exe
+C:\Users\varsh\source\repos\calculator\calculator\bin\Debug\calculator.pdb
+C:\Users\varsh\source\repos\calculator\calculator\obj\Debug\calculator.csproj.AssemblyReference.cache
+C:\Users\varsh\source\repos\calculator\calculator\obj\Debug\calculator.Properties.Resources.resources
+C:\Users\varsh\source\repos\calculator\calculator\obj\Debug\calculator.csproj.GenerateResource.cache
+C:\Users\varsh\source\repos\calculator\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.cache
+C:\Users\varsh\source\repos\calculator\calculator\obj\Debug\calculator.exe
+C:\Users\varsh\source\repos\calculator\calculator\obj\Debug\calculator.pdb
+C:\Users\varsh\source\repos\calculator\calculator\obj\Debug\calculator.form1.resources
