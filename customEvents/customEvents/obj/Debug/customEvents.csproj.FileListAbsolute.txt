@@ -1,0 +1,10 @@
+C:\Users\varsh\source\repos\customEvents\customEvents\bin\Debug\customEvents.exe.config
+C:\Users\varsh\source\repos\customEvents\customEvents\bin\Debug\customEvents.exe
+C:\Users\varsh\source\repos\customEvents\customEvents\bin\Debug\customEvents.pdb
+C:\Users\varsh\source\repos\customEvents\customEvents\obj\Debug\customEvents.csproj.AssemblyReference.cache
+C:\Users\varsh\source\repos\customEvents\customEvents\obj\Debug\customEvents.Form1.resources
+C:\Users\varsh\source\repos\customEvents\customEvents\obj\Debug\customEvents.Properties.Resources.resources
+C:\Users\varsh\source\repos\customEvents\customEvents\obj\Debug\customEvents.csproj.GenerateResource.cache
+C:\Users\varsh\source\repos\customEvents\customEvents\obj\Debug\customEvents.csproj.CoreCompileInputs.cache
+C:\Users\varsh\source\repos\customEvents\customEvents\obj\Debug\customEvents.exe
+C:\Users\varsh\source\repos\customEvents\customEvents\obj\Debug\customEvents.pdb
