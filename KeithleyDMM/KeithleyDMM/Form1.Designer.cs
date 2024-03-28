@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mRangeComboBox = new System.Windows.Forms.ComboBox();
             this.GetButton = new System.Windows.Forms.Button();
             this.DCVBtn = new System.Windows.Forms.Button();
@@ -50,6 +50,7 @@
             this.CounttxtBox = new System.Windows.Forms.TextBox();
             this.digiVBtn = new System.Windows.Forms.Button();
             this.digiIBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.mRangePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiaChart)).BeginInit();
             this.SuspendLayout();
@@ -169,22 +170,23 @@
             this.mOutputLabel.AutoSize = true;
             this.mOutputLabel.Location = new System.Drawing.Point(144, 231);
             this.mOutputLabel.Name = "mOutputLabel";
-            this.mOutputLabel.Size = new System.Drawing.Size(60, 17);
+            this.mOutputLabel.Size = new System.Drawing.Size(54, 16);
             this.mOutputLabel.TabIndex = 25;
             this.mOutputLabel.Text = "Result : ";
+            this.mOutputLabel.Click += new System.EventHandler(this.mOutputLabel_Click);
             // 
             // DiaChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.DiaChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.DiaChart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.DiaChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.DiaChart.Legends.Add(legend2);
             this.DiaChart.Location = new System.Drawing.Point(301, 255);
             this.DiaChart.Name = "DiaChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.DiaChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.DiaChart.Series.Add(series2);
             this.DiaChart.Size = new System.Drawing.Size(869, 346);
             this.DiaChart.TabIndex = 26;
             this.DiaChart.Text = "chart1";
@@ -195,7 +197,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(858, 71);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 17);
+            this.label1.Size = new System.Drawing.Size(81, 16);
             this.label1.TabIndex = 27;
             this.label1.Text = "sampleRate";
             // 
@@ -211,7 +213,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(839, 122);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(147, 17);
+            this.label2.Size = new System.Drawing.Size(138, 16);
             this.label2.TabIndex = 29;
             this.label2.Text = "Count(No of Samples)";
             // 
@@ -242,11 +244,22 @@
             this.digiIBtn.UseVisualStyleBackColor = true;
             this.digiIBtn.Click += new System.EventHandler(this.digiIBtn_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(752, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(85, 40);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "Abort";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1175, 607);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.digiIBtn);
             this.Controls.Add(this.digiVBtn);
             this.Controls.Add(this.CounttxtBox);
@@ -266,6 +279,7 @@
             this.Controls.Add(this.GetButton);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.mRangePanel.ResumeLayout(false);
             this.mRangePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiaChart)).EndInit();
@@ -294,6 +308,7 @@
         private System.Windows.Forms.TextBox CounttxtBox;
         private System.Windows.Forms.Button digiVBtn;
         private System.Windows.Forms.Button digiIBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

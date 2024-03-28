@@ -24,3 +24,4 @@ C:\Users\varsh\OneDrive\Documents\KeithleyDMM\KeithleyDMM\obj\Debug\KeithleyDMM.
 C:\Users\varsh\OneDrive\Documents\KeithleyDMM\KeithleyDMM\obj\Debug\KeithleyDMM.csproj.CopyComplete
 C:\Users\varsh\OneDrive\Documents\KeithleyDMM\KeithleyDMM\obj\Debug\KeithleyDMM.exe
 C:\Users\varsh\OneDrive\Documents\KeithleyDMM\KeithleyDMM\obj\Debug\KeithleyDMM.pdb
+C:\Users\varsh\OneDrive\Documents\KeithleyDMM\KeithleyDMM\obj\Debug\KeithleyDMM.csproj.SuggestedBindingRedirects.cache

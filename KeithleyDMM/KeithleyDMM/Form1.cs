@@ -22,6 +22,7 @@ namespace KeithleyDMM
     {
         Ivi.Visa.Interop.ResourceManager resourcemanager = new Ivi.Visa.Interop.ResourceManager();
         FormattedIO488 ioObject = new FormattedIO488();
+        KeithleyDMMDriver mKeithleyDMMDriver = new KeithleyDMMDriver();
         string[] DCV = {":AUTO ON", " 100e-3", " 1", " 10", " 100", " 1000" };
         string[] ACV = {":AUTO ON", " 100e-3", " 1", " 10", " 100", " 750" };
         string[] DCI = {":AUTO ON", " 10e-6", " 100e-6", " 1e-3", " 10e-3", " 100e-3", " 1", " 3" };
@@ -31,24 +32,27 @@ namespace KeithleyDMM
         string visaAddress = "USB0::0x05E6::0x6500::04499434::INSTR";
 
         string param = "";
-        string range = "";
+        double range;
+        bool flag = false;
         string result = "";
         string unit = "";
         public Form1()
         {
             InitializeComponent();
             mRangePanel.Visible = false;
-            ioObject.IO = (Ivi.Visa.Interop.IMessage)resourcemanager.Open(visaAddress, AccessMode.NO_LOCK, 1000, "");
-            ioObject.IO.Timeout = 10000;
+            /*ioObject.IO = (Ivi.Visa.Interop.IMessage)resourcemanager.Open(visaAddress, AccessMode.NO_LOCK, 1000, "");
+            ioObject.IO.Timeout = 10000;*/
+            mKeithleyDMMDriver.Connect(visaAddress);
+
         }
-        public void getBuffer()
+        /*public void getBuffer()
         {
             ioObject.WriteString("*RST");
             Thread.Sleep(100);
             ioObject.WriteString(":TRACe:CLEar \"defbuffer1\"");
             ioObject.WriteString(":TRACe:FILL:MODE CONT, \"defbuffer1\"");
-        }
-        private void getCommand()
+        }*/
+        /*private void getCommand()
         {
             try
             {
@@ -67,13 +71,14 @@ namespace KeithleyDMM
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-        }
+        }*/
         private void DataTimer_Tick(object sender, EventArgs e)
         {
             try
             {
+                // config
                 // Read measurement result
-                getCommand();
+                
                 mOutputLabel.Text = float.Parse(result) * 1e0 + unit;
                 double measurementResult = Convert.ToDouble(result);
                 DiaChart.Series[0].Points.AddY(measurementResult);
@@ -91,7 +96,7 @@ namespace KeithleyDMM
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            getCommand();
+            //config
             DiaChart.Series[0].Points.Clear();
             mOutputLabel.Text = float.Parse(result) * 1e0 + unit;
             System.Windows.Forms.Timer dataTimer = new System.Windows.Forms.Timer();
@@ -106,7 +111,22 @@ namespace KeithleyDMM
             for(int i=0;i<DCV.Length;i++)
                 mRangeComboBox.Items.Add(DCV[i]);
             mRangePanel.Visible = true;
-            param = "VOLT:DC";
+            try
+            {
+                mKeithleyDMMDriver.Connect(visaAddress);
+                if(mRangeComboBox.SelectedIndex.ToString().Equals(":AUTO ON")==true){
+                    result = mKeithleyDMMDriver.ReadDCVoltage(0, true).ToString();
+                }
+                else
+                {
+                    
+                    result = mKeithleyDMMDriver.ReadDCVoltage(range, false).ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
             unit = " V";
            
         }
@@ -117,7 +137,22 @@ namespace KeithleyDMM
             for (int i = 0; i < DCI.Length; i++)
                 mRangeComboBox.Items.Add(DCI[i]);
             mRangePanel.Visible = true;
-            param = "CURR:DC";
+            try
+            {
+                mKeithleyDMMDriver.Connect(visaAddress);
+                if (mRangeComboBox.SelectedIndex.ToString().Equals(":AUTO ON")==true){
+                    result = mKeithleyDMMDriver.ReadDCCurrent(0, true).ToString();
+                }
+                else
+                {
+                    //range = Double.Parse(mRangeComboBox.SelectedItem.ToString());
+                    result = mKeithleyDMMDriver.ReadDCCurrent(range, false).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
             unit = " A";
         }
 
@@ -127,7 +162,22 @@ namespace KeithleyDMM
             for (int i = 0; i < RES.Length; i++)
                 mRangeComboBox.Items.Add(RES[i]);
             mRangePanel.Visible = true;
-            param = "RES";
+            try
+            {
+                mKeithleyDMMDriver.Connect(visaAddress);
+                if (mRangeComboBox.SelectedIndex.ToString().Equals(":AUTO ON") == true){
+                    result = mKeithleyDMMDriver.ReadResistance(0, true).ToString();
+                }
+                else
+                {
+                    //range = Double.Parse(mRangeComboBox.SelectedItem.ToString());
+                    result = mKeithleyDMMDriver.ReadResistance(range, false).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
             unit = " Ω";
         }
 
@@ -137,7 +187,22 @@ namespace KeithleyDMM
             for (int i = 0; i < ACV.Length; i++)
                 mRangeComboBox.Items.Add(ACV[i]);
             mRangePanel.Visible = true;
-            param = "VOLT:AC";
+            try
+            {
+                mKeithleyDMMDriver.Connect(visaAddress);
+                if (mRangeComboBox.SelectedIndex.ToString().Equals(":AUTO ON") == true){
+                    result = mKeithleyDMMDriver.ReadACVoltage(0, true).ToString();
+                }
+                else
+                {
+                    //range = Double.Parse(mRangeComboBox.SelectedItem.ToString());
+                    result = mKeithleyDMMDriver.ReadACVoltage(range, false).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
             unit = " V";
         }
 
@@ -147,7 +212,23 @@ namespace KeithleyDMM
             for (int i = 0; i < ACI.Length; i++)
                 mRangeComboBox.Items.Add(ACI[i]);
             mRangePanel.Visible = true;
-            param = "CURR:AC";
+            try
+            {
+                mKeithleyDMMDriver.Connect(visaAddress);
+                if (mRangeComboBox.SelectedIndex.ToString().Equals(":AUTO ON")==true){
+                    result = mKeithleyDMMDriver.ReadACCurrent(0, true).ToString();
+                }
+                else
+                {
+                    //range = Double.Parse(mRangeComboBox.SelectedItem.ToString());
+                    result = mKeithleyDMMDriver.ReadACCurrent(range, false).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
             unit = " A";
         }
 
@@ -158,21 +239,56 @@ namespace KeithleyDMM
             for (int i = 0; i < CAP.Length; i++)
                 mRangeComboBox.Items.Add(CAP[i]);
             mRangePanel.Visible = true;
-            param = "CAP";
+            try
+            {
+                mKeithleyDMMDriver.Connect(visaAddress);
+                if (flag)
+                {
+                    result = mKeithleyDMMDriver.ReadCapacitance(0, true).ToString();
+                }
+                else {
+                    //range = Double.Parse(mRangeComboBox.SelectedItem.ToString());
+                    result = mKeithleyDMMDriver.ReadCapacitance(range, false).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
             unit = " F";
         }
 
         private void DiodeBtn_Click(object sender, EventArgs e)
         {
             mRangePanel.Visible = false;
-            param = "DIOD";
-            range = "";
+            try
+            {
+                mKeithleyDMMDriver.Connect(visaAddress);
+                result = mKeithleyDMMDriver.ReadDiode().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
             unit = " V";
         }
 
         private void mRangeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            range = mRangeComboBox.SelectedItem.ToString();
+            if (mRangeComboBox.SelectedItem.ToString().Equals(":AUTO ON") == false)
+            {
+                //MessageBox.Show("Auto On Not Selected");
+                range = Double.Parse(mRangeComboBox.SelectedItem.ToString());
+                flag = false;
+            }
+            else
+            {
+                flag = true;
+            }
+            
+
+
         }
 
         private void DiaChart_Click(object sender, EventArgs e)
@@ -187,46 +303,36 @@ namespace KeithleyDMM
 
         private void digiVBtn_Click(object sender, EventArgs e)
         {
-            getBuffer();
             
-            //ioObject.WriteString("*RST");
-            ioObject.WriteString(":SENSe:DIGitize:FUNCtion \"VOLT\"");
-            ioObject.WriteString(":SENSe:DIGitize:VOLTage:SRATe "+SampletxtBox.Text);
-            ioObject.WriteString(":DIG:VOLT:ATR:MODE EDGE");
-            ioObject.WriteString(":DIG:VOLT:ATR:EDGE:LEV 0.5");
-            ioObject.WriteString(":TRACe:POINts ,"+CounttxtBox.Text + "\"defbuffer1\"");
-            ioObject.WriteString(":TRIGger:LOAD \"LoopUntilEvent\", ATRigger, 25, ENTer, 0, \"defbuffer1\"");
-            ioObject.WriteString(":DISPlay:SCReen GRAPh");
-            ioObject.WriteString("*WAI");
-            ioObject.WriteString(":INIT");
-            Thread.Sleep(int.Parse(SampletxtBox.Text) + int.Parse(CounttxtBox.Text) + 50);
-            ioObject.WriteString(":TRACe:DATA? 1, " + CounttxtBox.Text);
-            result = ioObject.ReadString();
-            double[] value = result.Split(',').Select(Double.Parse).ToArray();
+            double sample=Double.Parse(SampletxtBox.Text);
+            double count=Double.Parse(CounttxtBox.Text);
+            double[] value = mKeithleyDMMDriver.ReadVoltageWaveform(sample, count);
             DiaChart.Series[0].Points.Clear();
             DiaChart.Series[0].Points.DataBindY(value);
         }
 
         private void digiIBtn_Click(object sender, EventArgs e)
         {
-            getBuffer();
-
-            //ioObject.WriteString("*RST");
-            ioObject.WriteString(":SENSe:DIGitize:FUNCtion \"CURR\"");
-            ioObject.WriteString(":SENSe:DIGitize:CURRent:SRATe " + SampletxtBox.Text);
-            ioObject.WriteString(":DIG:CURR:ATR:MODE EDGE");
-            ioObject.WriteString(":DIG:CURR:ATR:EDGE:LEV 0.5");
-            ioObject.WriteString(":TRACe:POINts ," + CounttxtBox.Text + "\"defbuffer1\"");
-            ioObject.WriteString(":TRIGger:LOAD \"LoopUntilEvent\", ATRigger, 25, ENTer, 0, \"defbuffer1\"");
-            ioObject.WriteString(":DISPlay:SCReen GRAPh");
-            ioObject.WriteString("*WAI");
-            ioObject.WriteString(":INIT");
-            Thread.Sleep(int.Parse(SampletxtBox.Text) + int.Parse(CounttxtBox.Text) + 50);
-            ioObject.WriteString(":TRACe:DATA? 1, " + CounttxtBox.Text);
-            result = ioObject.ReadString();
-            double[] value = result.Split(',').Select(Double.Parse).ToArray();
+            double sample = Double.Parse(SampletxtBox.Text);
+            double count = Double.Parse(CounttxtBox.Text);
+            double[] value = mKeithleyDMMDriver.ReadCurrentWaveform(sample, count);
             DiaChart.Series[0].Points.Clear();
             DiaChart.Series[0].Points.DataBindY(value);
+        }
+
+        private void mOutputLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            mKeithleyDMMDriver.Abort();
         }
     }
 }
